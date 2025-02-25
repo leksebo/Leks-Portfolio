@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% load static %} {% block title %}Contact - My
+Portfolio{% endblock %} {% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body p-5">
+          <h1 class="text-center mb-4">Get in Touch</h1>
+          <div class="row mb-4">
+            <div class="col-md-4 text-center mb-3 mb-md-0">
+              <i class="bi bi-whatsapp fs-2 text-primary mb-2"></i>
+              <h5>Whatsapp</h5>
+              <p>
+                <a href="https://whatsapp.com/" class="text-decoration-none"
+                  >Message</a
+                >
+              </p>
+            </div>
+            <div class="col-md-4 text-center mb-3 mb-md-0">
+              <i class="bi bi-linkedin fs-2 text-primary mb-2"></i>
+              <h5>LinkedIn</h5>
+              <p>
+                <a
+                  href="https://linkedin.com/in/leks-ebo"
+                  target="_blank"
+                  class="text-decoration-none"
+                  >Connect with me</a
+                >
+              </p>
+            </div>
+            <div class="col-md-4 text-center">
+              <i class="bi bi-github fs-2 text-primary mb-2"></i>
+              <h5>GitHub</h5>
+              <p>
+                <a
+                  href="https://github.com/leksebo"
+                  target="_blank"
+                  class="text-decoration-none"
+                  >View my code</a
+                >
+              </p>
+            </div>
+          </div>
+          <div class="text-center">
+            <p class="mb-4">
+              I'm always interested in hearing about new projects and
+              opportunities.
+            </p>
+            <a
+              href="mailto:your.email@example.com"
+              class="btn btn-primary btn-lg"
+            >
+              <i class="bi bi-envelope-fill me-2"></i>Send me an email
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+/* Custom styles for Django Admin */
+body {
+  background-color: #f0f0f0; /* Light gray background */
+}
+
+.navbar {
+  background-color: #007bff; /* Bootstrap primary color */
+}
+
+.navbar a {
+  color: white; /* White text for navbar links */
+}
+
+.project-card {
+  border: 1px solid #ccc; /* Light gray border for project cards */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Padding inside project cards */
+  margin-bottom: 15px; /* Space between project cards */
+}

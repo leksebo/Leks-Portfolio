@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% load static %} {% block title %}Home - My
+Portfolio{% endblock %} {% block content %}
+<div class="home-content">
+  <h1>Welcome to My Portfolio</h1>
+
+  {% if personal_info %}
+  <div class="personal-info">
+    <h2>{{ personal_info.name }}</h2>
+    <h3>{{ personal_info.role }}</h3>
+    <div class="description">{{ personal_info.description|safe }}</div>
+  </div>
+  {% else %}
+  <p>This is the home page of my portfolio.</p>
+  {% endif %}
+</div>
+
+<div class="banner-container">
+  <div class="moving-banner">
+    <div class="banner-content">
+      <i class="fab fa-python banner-icon" title="Python"></i>
+      <i class="fab fa-js-square banner-icon" title="JavaScript"></i>
+      <i class="fab fa-html5 banner-icon" title="HTML5"></i>
+      <i class="fab fa-css3-alt banner-icon" title="CSS3"></i>
+      <i class="fab fa-react banner-icon" title="React"></i>
+      <i class="fab fa-node-js banner-icon" title="Node.js"></i>
+      <i class="bi bi-code-square banner-icon" title="Django"></i>
+      <i class="bi bi-bootstrap banner-icon" title="Bootstrap"></i>
+      <i class="fab fa-git-alt banner-icon" title="Git"></i>
+      <i class="fab fa-github banner-icon" title="GitHub"></i>
+      <i class="fab fa-docker banner-icon" title="Docker"></i>
+      <i class="bi bi-database-fill banner-icon" title="PostgreSQL"></i>
+      <!-- Duplicate for continuous scroll -->
+      <i class="fab fa-python banner-icon" title="Python"></i>
+      <i class="fab fa-js-square banner-icon" title="JavaScript"></i>
+      <i class="fab fa-html5 banner-icon" title="HTML5"></i>
+      <i class="fab fa-css3-alt banner-icon" title="CSS3"></i>
+      <i class="fab fa-react banner-icon" title="React"></i>
+      <i class="fab fa-node-js banner-icon" title="Node.js"></i>
+      <i class="bi bi-code-square banner-icon" title="Django"></i>
+      <i class="bi bi-bootstrap banner-icon" title="Bootstrap"></i>
+      <i class="fab fa-git-alt banner-icon" title="Git"></i>
+      <i class="fab fa-github banner-icon" title="GitHub"></i>
+      <i class="fab fa-docker banner-icon" title="Docker"></i>
+      <i class="bi bi-database-fill banner-icon" title="PostgreSQL"></i>
+    </div>
+  </div>
+</div>
+{% endblock %}
