@@ -115,6 +115,30 @@ The project uses different settings files:
   - Served by WhiteNoise with compression
   - Run `python manage.py collectstatic` to update
 
+## Database Schema
+
+The project uses two main models for content management:
+
+### PersonalInfo
+
+Stores personal information displayed on the portfolio:
+
+- `name` (CharField): Full name of the portfolio owner
+- `description` (HTMLField): Rich text description/bio
+- `role` (CharField): Professional role/title
+
+### Project
+
+Manages portfolio project entries:
+
+- `title` (CharField): Project title
+- `description` (HTMLField): Rich text project description
+- `link` (URLField): URL to the project
+- `image` (ImageField): Project screenshot or preview image
+- `is_featured` (BooleanField): Flag for featuring projects on the homepage
+
+All content can be managed through Django's admin interface, with rich text editing support via TinyMCE for descriptions.
+
 ## License
 
 This project is licensed under the MIT License.
