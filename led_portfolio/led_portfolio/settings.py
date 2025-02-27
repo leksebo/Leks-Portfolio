@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,9 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%%@hc$&j=ims#p6-yjff(ijz2_el#60^+h+-@ccf#4(-)_36)*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'led-portfolio-c2f377f40edc.herokuapp.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -58,10 +59,10 @@ WSGI_APPLICATION = 'led_portfolio.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600
+    )
 }
 
 # Password validation
@@ -91,15 +92,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'portfolio/static'),
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# Simplified static file serving
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Whitenoise settings
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # TinyMCE Configuration
 TINYMCE_DEFAULT_CONFIG = {
@@ -146,5 +148,15 @@ TINYMCE_DEFAULT_CONFIG = {
     }'''
 }
 
+# Heroku Settings
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+# Fix sqlite3 issue on Heroku
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
