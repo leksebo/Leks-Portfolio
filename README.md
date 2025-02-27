@@ -74,7 +74,7 @@ This portfolio website is designed to showcase my professional work and skills t
 4. Install dependencies:
 
    ```bash
-   pip install django tinymce
+   pip install -r requirements.txt
    ```
 
 5. Create a superuser to access the admin interface:
@@ -99,17 +99,35 @@ This portfolio website is designed to showcase my professional work and skills t
 ## Project Structure
 
 ```
-led_portfolio/
-├── portfolio/                 # Main app directory
-│   ├── models.py             # Database models (PersonalInfo, Project)
-│   ├── views.py              # View logic
-│   ├── urls.py              # URL routing
-│   ├── admin.py             # Admin interface customization
-│   ├── static/              # Static files (CSS, JS, images)
-│   └── templates/           # HTML templates
-├── media/                    # User-uploaded files
-├── static/                   # Static files
-└── manage.py                # Django management script
+Leks Portfolio/
+├── led_portfolio/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+├── portfolio/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   ├── templates/
+│   │   └── portfolio/
+│   │       ├── base.html
+│   │       ├── home.html
+│   │       ├── projects.html
+│   │       └── contact.html
+│   └── static/
+│       └── portfolio/
+│           ├── css/
+│           ├── js/
+│           └── images/
+├── staticfiles/
+├── media/
+├── requirements.txt
+├── Procfile
+└── .gitignore
 ```
 
 ## License
