@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
-import django_heroku
 import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%%@hc$&j=ims#p6-yjff(ijz2_el#60^+h+-@ccf#4(-)_36)*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+DEBUG = True  # Set to True for development
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -33,8 +33,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -42,6 +41,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Only add SecurityMiddleware in production
+if not DEBUG:
+    MIDDLEWARE.insert(0, 'django.middleware.security.SecurityMiddleware')
 
 ROOT_URLCONF = 'led_portfolio.urls'
 
@@ -154,18 +157,29 @@ TINYMCE_DEFAULT_CONFIG = {
     }'''
 }
 
+# SSL and Security Settings
+SECURE_SSL_REDIRECT = False  # Explicitly disable SSL redirect in development
+SECURE_PROXY_SSL_HEADER = None  # Disable SSL header in development
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
+
 # Heroku Settings
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = not DEBUG
-SESSION_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
-SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
-SECURE_HSTS_PRELOAD = not DEBUG
+if not DEBUG:
+    # Enable SSL settings in production
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-
-# Fix sqlite3 issue on Heroku
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+if not DEBUG:
+    # Activate Django-Heroku only in production
+    django_heroku.settings(locals())
+    # Fix sqlite3 issue on Heroku
+    options = DATABASES['default'].get('OPTIONS', {})
+    options.pop('sslmode', None)
