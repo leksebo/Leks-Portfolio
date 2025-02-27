@@ -13,5 +13,9 @@ from whitenoise import WhiteNoise
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'led_portfolio.settings_combined')
 
+# Initialize Django WSGI application
 application = get_wsgi_application()
-application = WhiteNoise(application)
+
+# Add WhiteNoise with max-age cache headers for static files
+application = WhiteNoise(application, root='staticfiles/')
+application.add_files('staticfiles/', prefix='static/')

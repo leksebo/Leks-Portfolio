@@ -1,1 +1,1 @@
-web: cd led_portfolio && DJANGO_ENV=production gunicorn led_portfolio.wsgi --log-file -
+web: cd led_portfolio && DJANGO_ENV=production python manage.py collectstatic --noinput && gunicorn led_portfolio.wsgi --log-file -

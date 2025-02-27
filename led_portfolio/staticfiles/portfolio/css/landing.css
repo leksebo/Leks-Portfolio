@@ -1,154 +1,81 @@
-/* Base styles */
-body,
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+body {
   background-color: #000000;
-  overflow: hidden;
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
 }
 
-.galaxy-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Logo styles */
 .logo-container {
-  position: absolute;
-  z-index: 10;
-}
-
-.logo-wrapper {
-  padding: 3rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1),
-    inset 0 0 20px rgba(255, 255, 255, 0.05);
-  transition: all 0.5s ease;
-}
-
-.logo-wrapper:hover {
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.2),
-    inset 0 0 30px rgba(255, 255, 255, 0.1);
-  transform: scale(1.02);
-}
-
-.logo-link {
-  display: block;
   width: 250px;
   height: 250px;
-  transition: all 0.5s ease;
+  margin: 0 auto;
 }
 
 .logo {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   object-fit: cover;
-  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
-/* Tech icon styles */
-.tech-icons {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.slogan {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+    0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
-.tech-icon {
-  position: absolute;
-  font-size: 2.8rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0.15;
-  left: calc(50% + var(--x));
-  top: calc(50% + var(--y));
-  transform: translate(-50%, -50%);
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+      0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.4);
+  }
 }
 
-.tech-icon:hover {
-  opacity: 1;
-  filter: drop-shadow(0 0 15px currentColor);
+.btn-outline-light {
+  border-width: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
-/* Tech icon colors */
-.fa-python {
-  color: #4b8bbe;
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
-.fa-js-square {
-  color: #f0db4f;
-}
-.fa-html5 {
-  color: #ff5722;
-}
-.fa-css3-alt {
-  color: #2196f3;
-}
-.fa-react {
-  color: #61dbfb;
-}
-.fa-node-js {
-  color: #68a063;
-}
-.fa-angular {
-  color: #dd0031;
-}
-.fa-vuejs {
-  color: #42b883;
-}
-.fa-git-alt {
-  color: #f05033;
-}
-.fa-github {
-  color: #ffffff;
-}
-.fa-docker {
-  color: #2496ed;
-}
-.fa-aws {
-  color: #ff9900;
+
+footer {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  .logo-link {
+  .logo-container {
     width: 200px;
     height: 200px;
   }
 
-  .logo-wrapper {
-    padding: 2rem;
-  }
-
-  .tech-icon {
-    font-size: 2.2rem;
-  }
-
-  .tech-icons {
-    transform: scale(0.75);
+  .slogan {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .logo-link {
+  .logo-container {
     width: 150px;
     height: 150px;
   }
 
-  .logo-wrapper {
-    padding: 1.5rem;
-  }
-
-  .tech-icon {
-    font-size: 2rem;
-  }
-
-  .tech-icons {
-    transform: scale(0.5);
+  .slogan {
+    font-size: 1.5rem;
   }
 }
