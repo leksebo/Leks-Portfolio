@@ -1,134 +1,54 @@
-# Personal Portfolio Website
+# LED Portfolio - Django Portfolio Website
 
-A modern, dynamic portfolio website built with Django, featuring a clean design and easy content management system to showcase my projects and skills as a Software Engineer.
+## Development Guide
 
-## Table of Contents
+### Local Development
 
-- [About](#about)
-- [Features](#features)
-- [Technologies](#technologies)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [License](#license)
-- [Contact](#contact)
-
-## About
-
-This portfolio website is designed to showcase my professional work and skills through a modern, responsive interface. It features dynamic content management through Django's admin interface, allowing for easy updates and maintenance of portfolio content.
-
-## Features
-
-- Dynamic content management via Django admin interface
-- Responsive design optimized for all devices
-- Project showcase with featured projects highlighting
-- Rich text editing for project descriptions using TinyMCE
-- Integrated contact form using Google Forms
-- Skills showcase with animated technology banner
-- Clean and modern user interface
-- SEO-friendly structure
-
-## Technologies
-
-### Backend
-
-- Django 5.1
-- SQLite3
-- TinyMCE for rich text editing
-
-### Frontend
-
-- HTML5
-- CSS3 with Bootstrap
-- JavaScript
-- Font Awesome and Bootstrap Icons
-- Responsive Design
-
-### Development Tools
-
-- Git & GitHub
-- VS Code
-- Django Debug Toolbar
-
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/leksebo/led_portfolio.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd led_portfolio
-   ```
-
-3. Create and activate a virtual environment:
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-4. Install dependencies:
+1. Install dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-5. Apply migrations:
+2. Run migrations:
 
    ```bash
    python manage.py migrate
    ```
 
-6. Create a superuser to access the admin interface:
-
+3. Run the development server:
    ```bash
-   python manage.py createsuperuser
+   python manage.py runserver localhost:8000 --settings=led_portfolio.settings_combined
    ```
 
-7. Run the development server:
-   ```bash
-   python manage.py runserver
-   ```
+### Settings Configuration
 
-## Usage
+The project uses different settings for different environments:
 
-- Access the website at `http://localhost:8000`
-- Admin panel: `http://localhost:8000/admin`
-  - Manage Personal Information
-  - Add/Edit Projects
-  - Toggle Featured Projects
+- `settings_combined.py`: Main settings file that:
+  - Automatically detects development/production environment
+  - Configures security settings appropriately
+  - Handles static files per environment
+  - Uses WhiteNoise for static file serving
 
-## Project Structure
+### Static Files
 
-```
-led_portfolio/
-├── portfolio/                 # Main app directory
-│   ├── models.py             # Database models (PersonalInfo, Project)
-│   ├── views.py              # View logic
-│   ├── urls.py              # URL routing
-│   ├── admin.py             # Admin interface customization
-│   ├── static/              # Static files (CSS, JS, images)
-│   └── templates/           # HTML templates
-├── media/                    # User-uploaded files
-├── static/                   # Static files
-├── staticfiles/             # Collected static files
-├── requirements.txt         # Project dependencies
-├── Procfile                # Heroku configuration
-└── manage.py               # Django management script
-```
+Static files are handled differently in development and production:
 
-## License
+- Development:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+  - Served directly by Django
+  - No compression or caching
+  - Files served from `portfolio/static/`
 
-## Contact
+- Production:
+  - Served by WhiteNoise
+  - Compression and caching enabled
+  - Files collected to `staticfiles/`
+  - Run `python manage.py collectstatic` to collect files
 
-Feel free to reach out to me:
+### Environment Variables
 
-- GitHub: [github.com/leksebo](https://github.com/leksebo)
-- LinkedIn: [linkedin.com/in/leks-ebo](https://linkedin.com/in/leks-ebo)
-- Contact Form: Available on the website
+- `DJANGO_ENV`: Set to 'production' in production
+- `DEBUG`: Controls debug mode
+- `DATABASE_URL`: Production database URL (Heroku)
