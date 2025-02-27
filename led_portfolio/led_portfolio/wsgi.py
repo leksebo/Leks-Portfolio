@@ -11,7 +11,7 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'led_portfolio.production')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'led_portfolio.settings_combined')
 
 application = get_wsgi_application()
 application = WhiteNoise(application)
