@@ -10,9 +10,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%%@hc$&j=ims#p6-yjff(ijz2_el#60^+h+-@ccf#4(-)_36)*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'led-portfolio-c2f377f40edc.herokuapp.com']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'led-portfolio-c2f377f40edc.herokuapp.com',
+    'ancient-lemongrass-qi16rk8xa0ohhqf71fha6vba.herokudns.com'
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -150,9 +156,12 @@ TINYMCE_DEFAULT_CONFIG = {
 
 # Heroku Settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
